@@ -3,6 +3,8 @@ import { json } from "body-parser";
 import todoRoutes from "./routes/todos";
 import { Request, Response, NextFunction } from "express";
 
+require("dotenv").config();
+
 const app = express();
 
 app.use(json());
@@ -13,4 +15,3 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(3000);
-////asdf

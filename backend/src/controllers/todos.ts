@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { Todo } from "../models/todo";
+import OpenAI from "openai";
 
 const TODOS: Todo[] = [];
 
@@ -47,4 +48,31 @@ export const deleteTodo: RequestHandler<{ id: string }> = (req, res, next) => {
   TODOS.splice(todoIndex, 1);
 
   res.status(201).json({ message: "Todo Deleted" });
+};
+
+export const autofillTodo: RequestHandler = (req, res, next) => {
+  const promptTitle = (req.body as { title: string }).title;
+
+  const prompt =
+    "Can write a three sentence description about describing subtasks for title: " +
+    promptTitle;
+
+  let gptres;
+  const runPrompt = async () => {
+    const openai = new OpenAI({
+      apiKey: process.env.GPT_AUTOFILLER,
+    });
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 64,
+      top_p: 1.0,
+    });
+
+    const output = response.choices[0].message.content;
+    gptres = output;
+    console.log(output);
+  };
+  runPrompt();
+  res.status(201).json({ response: gptres });
 };
