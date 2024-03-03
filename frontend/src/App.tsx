@@ -1,19 +1,23 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
+import NavBar from "./components/NavBar";
+import PageNotFound from "./pages/PageNotFound";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <Router>
+      <NavBar />
+      <div className="content">
         <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="/about" element={<AboutPage />}></Route>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </Router>
   );
 };
 
