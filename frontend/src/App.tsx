@@ -5,14 +5,16 @@ import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 import NavBar from "./components/NavBar";
 import PageNotFound from "./pages/PageNotFound";
+import AddTodoPage from "./pages/AddTodo";
 
 const App: React.FC = () => {
   return (
     <Router>
       <NavBar />
-      <div className="content">
+      <div className="app">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/addtodo" element={<AddTodoPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>

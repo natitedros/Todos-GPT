@@ -1,9 +1,11 @@
+import NewTodo from "../components/NewTodo";
+
 interface HomePageProps {}
 
 const HomePage: React.FunctionComponent<HomePageProps> = () => {
   return (
-    <div>
-      <p>Home Page</p>
+    <div className="home">
+      <p>Home Page...</p>
     </div>
   );
 };
