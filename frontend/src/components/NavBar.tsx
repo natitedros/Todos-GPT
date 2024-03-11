@@ -5,10 +5,16 @@ const NavBar: React.FunctionComponent<NavBarProps> = () => {
   return (
     <nav className="nav">
       <h1>Todo wit AI</h1>
-      <div className="links">
-        <Link to="/">Home</Link>
-        <Link to="/addtodo">Add</Link>
-        <Link to="/about">About</Link>
+      <div className="tabList">
+        <Link className="links" to="/">
+          Home
+        </Link>
+        <Link className="links" to="/addtodo">
+          Add
+        </Link>
+        <Link className="links" to="/about">
+          About
+        </Link>
       </div>
     </nav>
   );

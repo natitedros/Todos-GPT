@@ -22,10 +22,13 @@ nav {
   display: flex;
   justify-content: space-between;
 }
-.links {
+.tabList {
   display: flex;
   justify-content: space-evenly;
-  margin: 10px;
+}
+.links {
+  align-self: center;
+  margin: 1rem;
 }
 .newTodo {
   width: 30%;

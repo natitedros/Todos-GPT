@@ -2,7 +2,9 @@ import { RequestHandler } from "express";
 import { Todo } from "../models/todo";
 import OpenAI from "openai";
 
-const TODOS: Todo[] = [];
+const TODOS: Todo[] = [
+  new Todo(Math.random().toString(), "testTitle", "testDescription"),
+];
 
 export const createTodo: RequestHandler = (req, res, next) => {
   const { title, description } = req.body as {
@@ -18,6 +20,7 @@ export const createTodo: RequestHandler = (req, res, next) => {
 };
 
 export const getTodos: RequestHandler = (req, res, next) => {
+  console.log(TODOS);
   res.status(201).json({ todos: TODOS });
 };
 
