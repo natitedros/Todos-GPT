@@ -50,3 +50,20 @@ nav {
   border-radius: 12px;
   margin-top: 1rem;
 }
+.singleTodo {
+  width: 50%;
+  margin: 2rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border-left: #ccc 1px solid;
+}
+
+button {
+  border: #ccc 1px solid;
+  border-radius: 6px;
+  padding: 4px;
+  margin-right: 6px;
+}
+button:visited {
+  text-decoration: none;
+}

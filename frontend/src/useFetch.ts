@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { Todo } from "./models/todo.model";
 
-const useFetch = (url: string) => {
+type HttpMethod = "GET" | "POST" | "PATCH" | "DELETE";
+
+const useFetch = (
+  url: string,
+  method: HttpMethod,
+  body: { title: string; description: string } | null = null
+) => {
   const [data, setData] = useState<Todo[] | null>(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const abortCont = new AbortController();
-    fetch(url, { signal: abortCont.signal })
+    fetch(url, {
+      method,
+      ...(method !== "GET" && { body: JSON.stringify(body) }),
+      signal: abortCont.signal,
+    })
       .then((res) => {
         if (!res.ok) {
           throw Error("Could not fetch data!");

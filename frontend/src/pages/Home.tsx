@@ -8,7 +8,7 @@ const HomePage: React.FunctionComponent<HomePageProps> = () => {
     data: todos,
     isPending,
     error,
-  } = useFetch("http://localhost:8080/todos");
+  } = useFetch("http://localhost:8080/todos", "GET");
   return (
     <div className="home">
       {isPending && <p>Loading...</p>}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Todo } from "../models/todo.model";
+import SingleTodo from "./SingleTodo";
 interface TodoListProps {
   todos: Todo[];
   title: string;
@@ -12,10 +13,11 @@ const TodoList: React.FunctionComponent<TodoListProps> = (props) => {
     <div>
       <h2>{title}</h2>
       {todos.map((todo) => (
-        <div>
-          <h2>{todo.title}</h2>
-          <p>{todo.description}</p>
-        </div>
+        <SingleTodo
+          id={todo.id}
+          title={todo.title}
+          description={todo.description}
+        />
       ))}
     </div>
   );

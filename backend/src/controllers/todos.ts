@@ -3,7 +3,11 @@ import { Todo } from "../models/todo";
 import OpenAI from "openai";
 
 const TODOS: Todo[] = [
-  new Todo(Math.random().toString(), "testTitle", "testDescription"),
+  new Todo(
+    Math.random().toString(),
+    "Finish Project",
+    "You have to finish the project within this week. The display might not be as good, but just finish it. It is a simple one with a RAM as the database."
+  ),
 ];
 
 export const createTodo: RequestHandler = (req, res, next) => {
@@ -16,11 +20,10 @@ export const createTodo: RequestHandler = (req, res, next) => {
 
   TODOS.push(newTodo);
 
-  res.status(201).json({ message: "created todo", createdTodo: newTodo });
+  res.status(201).json({ todos: TODOS });
 };
 
 export const getTodos: RequestHandler = (req, res, next) => {
-  console.log(TODOS);
   res.status(201).json({ todos: TODOS });
 };
 
@@ -33,15 +36,16 @@ export const updateTodo: RequestHandler<{ id: string }> = (req, res, next) => {
   ).description;
 
   const todoIndex = TODOS.findIndex((todo) => todo.id === todoId);
+  if (todoIndex < 0) {
+    throw new Error("Could not find todo!");
+  }
   TODOS[todoIndex] = new Todo(
     TODOS[todoIndex].id,
     updatedTitle,
     updatedDescription
   );
 
-  res
-    .status(201)
-    .json({ message: "Todo Updated", updatedTodo: TODOS[todoIndex] });
+  res.status(201).json({ todos: TODOS });
 };
 
 export const deleteTodo: RequestHandler<{ id: string }> = (req, res, next) => {
@@ -50,7 +54,7 @@ export const deleteTodo: RequestHandler<{ id: string }> = (req, res, next) => {
 
   TODOS.splice(todoIndex, 1);
 
-  res.status(201).json({ message: "Todo Deleted" });
+  res.status(201).json({ todos: TODOS });
 };
 
 export const autofillTodo: RequestHandler = (req, res, next) => {

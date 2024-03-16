@@ -6,6 +6,7 @@ import AboutPage from "./pages/About";
 import NavBar from "./components/NavBar";
 import PageNotFound from "./pages/PageNotFound";
 import AddTodoPage from "./pages/AddTodo";
+import UpdataTodoPage from "./pages/UpdateTodo";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/addtodo" element={<AddTodoPage />} />
+          <Route path="/updatetodo" element={<UpdataTodoPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
